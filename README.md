@@ -1,143 +1,109 @@
-Garbage Classification System using Deep Learning
-Project Overview
+# Garbage Classification System using EfficientNetB0
 
-This project focuses on developing an image classification system for garbage waste categories using deep learning techniques. The model automatically classifies waste images into different categories, helping in smart waste management and recycling automation.
+An AI-powered waste classification system that automatically identifies and categorizes garbage images using deep learning, complete with explainable AI visualizations and a desktop GUI.
 
-The system uses a Convolutional Neural Network (CNN) to analyze garbage images and predict the correct waste class.
+## Overview
 
-Objectives
+Manual waste sorting is slow, inconsistent, and labor-intensive. This project uses transfer learning to automatically classify waste images into distinct categories, helping enable smarter, faster, and more consistent recycling workflows.
 
-Automatically classify garbage images into predefined categories.
+The model is built on **EfficientNetB0**, fine-tuned on the **TrashNet** dataset, and achieves **~90–92% test accuracy**. To make the system transparent and trustworthy, three explainability techniques — **Grad-CAM**, **LIME**, and **SHAP** — are integrated to visually show which parts of an image influenced each prediction.
 
-Reduce manual waste sorting effort.
+## Features
 
-Support smart waste management systems.
+- **Deep Learning Classification** – EfficientNetB0 (transfer learning) fine-tuned for waste category prediction
+- **High Accuracy** – ~90–92% accuracy on the TrashNet dataset
+- **Explainable AI (XAI)** – Grad-CAM, LIME, and SHAP visualizations for model interpretability
+- **Desktop GUI** – Built with CustomTkinter for real-time image upload and classification
+- **Multi-class Support** – Classifies waste into categories such as plastic, paper, metal, glass, cardboard, and trash
 
-Improve recycling efficiency.
+## Dataset
 
-Dataset
+- **Source:** [TrashNet](https://github.com/garythung/trashnet)
+- **Classes:** Cardboard, Glass, Metal, Paper, Plastic, Trash
+- Images were preprocessed (resized, normalized, augmented) before training
 
-The dataset used in this project is sourced from Kaggle Garbage Classification Dataset.
+## Tech Stack
 
-Dataset Characteristics
+| Component | Technology |
+|---|---|
+| Model Architecture | EfficientNetB0 (Transfer Learning) |
+| Framework | TensorFlow / Keras |
+| Explainability | Grad-CAM, LIME, SHAP |
+| GUI | CustomTkinter |
+| Language | Python |
 
-Total Images: ~2500+
+## Project Structure
 
-Classes: 6 Waste Categories
+```
+garbage-classification/
+├── dataset/                 # TrashNet dataset (train/val/test splits)
+├── models/                  # Saved trained model weights
+├── notebooks/                # Training & experimentation notebooks
+├── explainability/           # Grad-CAM, LIME, SHAP scripts
+├── gui/                       # CustomTkinter desktop app
+│   └── app.py
+├── src/
+│   ├── train.py               # Model training script
+│   ├── preprocess.py          # Data preprocessing utilities
+│   └── predict.py             # Inference script
+├── requirements.txt
+└── README.md
+```
 
-Waste Categories
+## Installation
 
-Cardboard
-
-Glass
-
-Metal
-
-Paper
-
-Plastic
-
-Trash
-
-Dataset Link
-
-https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification
-
-Project Architecture
-Workflow
-
-Dataset Collection
-Data Preprocessing
-Image Augmentation
-Model Training
-Model Evaluation
-Prediction & Testing
-
-Input Image
-     ↓
-Preprocessing
-     ↓
-CNN Model
-     ↓
-Feature Extraction
-     ↓
-Classification Layer
-     ↓
-Predicted Garbage Class
-Technologies Used
-Technology	Purpose
-Python	Programming Language
-TensorFlow / Keras	Deep Learning Model
-OpenCV	Image Processing
-NumPy	Numerical Computations
-Matplotlib	Visualization
-Scikit-Learn	Model Evaluation
-Streamlit (optional)	Web App Interface
-Model Used
-
-The project uses a Convolutional Neural Network (CNN) for image classification.
-
-Model Features
-
-Multiple convolution layers
-
-ReLU activation
-
-Max pooling layers
-
-Fully connected layers
-
-Softmax output layer
-
-Model Performance
-
-Example performance metrics:
-
-Metric	Value
-Accuracy	~90%
-Loss	Low
-Precision	High
-Recall	High
-
-(Replace with your actual results)
-
-Installation
-Step 1: Clone the Repository
-git clone https://github.com/yourusername/garbage-classification.git
-Step 2: Navigate to Project Folder
+```bash
+# Clone the repository
+git clone <repo-url>
 cd garbage-classification
-Step 3: Install Dependencies
+
+# Create a virtual environment
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-Run the Project
-Train the Model
-python train_model.py
-Run Prediction
-python predict.py
-Run Web Application (Optional)
-streamlit run app.py
-Example Prediction
+```
 
-Input Image → Model → Output Class
+## Usage
 
-Example:
+**Train the model:**
+```bash
+python src/train.py
+```
 
-Input: plastic_bottle.jpg
-Output: Plastic
-Future Improvements
+**Run predictions on a single image:**
+```bash
+python src/predict.py --image path/to/image.jpg
+```
 
-Improve model accuracy with larger datasets.
+**Launch the desktop GUI:**
+```bash
+python gui/app.py
+```
 
-Deploy model using Flask / Streamlit Web App.
+## Results
 
-Integrate with IoT smart garbage bins.
+| Metric | Value |
+|---|---|
+| Test Accuracy | ~90–92% |
+| Model | EfficientNetB0 |
+| Dataset | TrashNet |
 
-Real-time waste detection using cameras.
+## Explainability
 
-Author
+The system uses three complementary techniques to explain predictions:
 
-Krishna Prasad
-M.Tech first Year Student
+- **Grad-CAM** – Highlights the regions of the image most responsible for the predicted class
+- **LIME** – Perturbs image segments to explain local model behavior
+- **SHAP** – Assigns contribution scores to image regions based on game-theoretic principles
 
-License
 
-This project is open-source and available under the MIT License.
+## Acknowledgements
+
+- [TrashNet Dataset](https://github.com/garythung/trashnet) by Gary Thung and Mindy Yang
+- EfficientNet architecture by Tan & Le (Google Research)
+
+## 📜 License
+
+This project is for academic purposes. Add a license of your choice here (e.g., MIT, Apache 2.0).
